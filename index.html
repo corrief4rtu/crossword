@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Crossword Puzzle</title>
+    <style>
+        body {
+            background-color: lavender;
+            font-family: Arial, sans-serif;
+        }
+        h1 {
+            text-align: center;
+        }
+        .crossword {
+            display: grid;
+            grid-template-columns: repeat(13, 30px);
+            gap: 2px;
+            justify-content: center;
+            margin: 20px 0;
+        }
+        .crossword input {
+            width: 28px;
+            height: 28px;
+            border: 1px solid #000;
+            text-align: center;
+            font-size: 18px;
+            text-transform: uppercase;
+        }
+        .hints {
+            margin: 20px;
+        }
+        .final-message {
+            display: none;
+            text-align: center;
+            font-size: 24px;
+            font-weight: bold;
+            color: darkmagenta;
+            margin-top: 20px;
+        }
+    </style>
+</head>
+<body>
+    <h1>Может быть, эти 50 фотографов в каких-то списках, но они не могут видеть мир... Разгадай кроссворд! Первые буквы этих загадок!</h1>
+    <div class="crossword">
+        <input type="text" maxlength="1" id="cell-1">
+        <input type="text" maxlength="1" id="cell-2">
+        <input type="text" maxlength="1" id="cell-3">
+        <input type="text" maxlength="1" id="cell-4">
+        <input type="text" maxlength="1" id="cell-5">
+        <input type="text" maxlength="1" id="cell-6">
+        <input type="text" maxlength="1" id="cell-7">
+        <input type="text" maxlength="1" id="cell-8">
+        <input type="text" maxlength="1" id="cell-9">
+        <input type="text" maxlength="1" id="cell-10">
+        <input type="text" maxlength="1" id="cell-11">
+        <input type="text" maxlength="1" id="cell-12">
+        <input type="text" maxlength="1" id="cell-13">
+    </div>
+    <div class="final-message">А я бы тоже очень хотел!</div>
+    <div class="hints">
+        <p>Подсказка: Часть многотомного издания, можно взять в библиотеке.</p>
+        <p>Подсказка: Время года, когда всё цветёт и теплеет.</p>
+        <p>Подсказка: Проем в стене, через который можно увидеть улицу.</p>
+        <p>Подсказка: Дерево с плакучей формой, часто встречается на берегах рек.</p>
+        <p>Подсказка: Маленькое животное, которое любит сыр.</p>
+        <p>Подсказка: Чёрная или красная, считается деликатесом.</p>
+        <p>Подсказка: Сладкий фрукт, форма которого напоминает лампочку.</p>
+        <p>Подсказка: Предмет в доме, который зажигают в темное время суток.</p>
+        <p>Подсказка: Архитектурный элемент, часто используемый в воротах и входах.</p>
+        <p>Подсказка: Используется для защиты от дождя или солнца.</p>
+        <p>Подсказка: Мифологическое или религиозное существо, символ добра.</p>
+        <p>Подсказка: Белый или цветной, используется учителями для письма на доске.</p>
+        <p>Подсказка: Деятельность, которая может быть как настольной, так и компьютерной.</p>
+    </div>
+
+    <script>
+        const solution = ["Т", "В", "О", "И", "М", "И", "Г", "Л", "А", "З", "А", "М", "И"];
+
+        document.querySelectorAll('.crossword input').forEach((input, index) => {
+            input.addEventListener('input', () => {
+                if (input.value.toUpperCase() === solution[index]) {
+                    input.style.backgroundColor = 'lightgreen';
+                } else {
+                    input.style.backgroundColor = 'lightcoral';
+                }
+                checkCompletion();
+            });
+        });
+
+        function checkCompletion() {
+            const userSolution = Array.from(document.querySelectorAll('.crossword input')).map(input => input.value.toUpperCase());
+            if (userSolution.join('') === solution.join('')) {
+                document.querySelector('.final-message').style.display = 'block';
+            } else {
+                document.querySelector('.final-message').style.display = 'none';
+            }
+        }
+    </script>
+</body>
+</html>
